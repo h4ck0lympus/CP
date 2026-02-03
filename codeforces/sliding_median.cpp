@@ -3,13 +3,6 @@
 
 using namespace std;
 
-#pragma GCC target ("avx2")
-#pragma GCC optimization ("O3")
-#pragma GCC optimization ("unroll-loops")
-#pragma optimization_level 3
-#pragma GCC optimize("Ofast,no-stack-protector,unroll-loops,fast-math,O3")
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
-
 #define int long long
 #define HAVE_TESTCASES 0
 
