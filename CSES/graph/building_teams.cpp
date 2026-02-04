@@ -5,25 +5,29 @@ using namespace std;
 #define int long long
 #define HAVE_TESTCASES 0
 
-vector<int> adj[150000];
-bool visited[150000];
+vector<int> adj[100005];
+bool visited[100005];
+int color[100005];
+bool possible = true;
 
-int vertices[150000]; // vertices per island stored by island leader
-int edges[150000]; // edges per island stored by island leader
-
-void dfs(int v, int leader) {
+void dfs(int v, int c){
   visited[v] = 1;
-  vertices[leader]++;
-
+  color[v] = c;
   for (int e: adj[v]) {
-    edges[leader]++;
-    if (visited[e]) continue;
-    dfs(e, leader);
+    if (!visited[e]) {
+      dfs(e, c ^ 1);
+    } else {
+      if (color[e] == c) {
+        possible = false;
+        return;
+      }
+    }
   }
 }
 
-// following would fail if no 3 distinct people are friends with each other
+// classic bipartite graph example
 void solve() {
+  memset(color, -1, sizeof(color));
   int n, m; cin >> n >> m;
 
   for (int i=0; i < m; i++) {
@@ -34,17 +38,19 @@ void solve() {
   }
 
   for (int i=0; i < n; i++) {
-    if (visited[i]) continue;
-    dfs(i, i);
+    if (!visited[i])
+      dfs(i, 0);
 
-    int v = vertices[i];
-    if (edges[i] != v * (v-1)) {
-      cout << "NO\n";
+    if (!possible) {
+      cout << "IMPOSSIBLE\n";
       return;
     }
   }
 
-  cout << "YES\n";
+  for (int i=0; i < n; i++) {
+    cout << color[i] + 1 << " ";
+  }
+  cout << "\n";
 }
 
 #undef int
