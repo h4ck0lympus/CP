@@ -5,22 +5,9 @@ using namespace std;
 #define int long long
 #define HAVE_TESTCASES 1
 
-vector<int> adj[100005];
+const int INF = (int) 1e18;
 
 void solve() {
-  int n, m; cin >> n >> m;
-
-  for (int i=0; i < m; i++)  {
-    int t,x,y; cin >> t >> x >> y;
-    if (t) {
-      // directed
-      adj[x].push_back(y);
-    } else {
-      // undirected
-      adj[x].push_back(y);
-      adj[y].push_back(x);
-    }
-  }
 
 }
 

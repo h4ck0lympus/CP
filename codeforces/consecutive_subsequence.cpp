@@ -5,10 +5,21 @@ using namespace std;
 #define int long long
 #define HAVE_TESTCASES 0
 
-const int INF = (int) 1e18;
-
 void solve() {
+  int n; cin >> n;
+  vector<int> arr;
+  for (int i=0; i < n; i++) {
+    int x; cin >> x;
+    arr.push_back(x);
+  }
 
+  // either start from scratch
+  // dp[i] = 1 or continue previous dp[i-1] + 1
+  vector<int> dp(n+1, 0);
+
+  for (int i=0; i < n; i++) {
+
+  }
 }
 
 #undef int

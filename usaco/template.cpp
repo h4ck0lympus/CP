@@ -1,11 +1,16 @@
+/*
+ID: vjuneja1
+TASK: 
+LANG: C++                 
+*/
 #include "bits/stdc++.h"
+
+#define TASK ""
 
 using namespace std;
 
 #define int long long
 #define HAVE_TESTCASES 0
-
-const int INF = (int) 1e18;
 
 void solve() {
 
@@ -13,6 +18,9 @@ void solve() {
 
 #undef int
 int main() {
+  freopen(TASK ".in", "r", stdin);
+  freopen(TASK ".out", "w", stdout);
+
   ios_base::sync_with_stdio(false);
   cin.tie(0);
 #if HAVE_TESTCASES
@@ -22,5 +30,7 @@ int main() {
 #else
   solve();
 #endif
+  return 0;
 }
+
 

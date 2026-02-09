@@ -1,4 +1,5 @@
 #include "bits/stdc++.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -6,43 +7,21 @@ using namespace std;
 #define HAVE_TESTCASES 0
 
 vector<vector<char>> game;
-vector<pair<int, int>> monsters;
-vector<pair<int, int>> exits;
 pair<int, int> player;
 
 int dx[] = {-1, 1, 0, 0};
 int dy[] = {0, 0, -1, 1};
 char dir[] = {'U', 'D', 'L', 'R'};
 
-bool visited[100005][100005];
-char parent[100005][100005];
-
-int start_to_exit = INT_MAX;
-
-void bfs(pair<int, int> start, pair<int, int> end) {
-  int distance = 0;
-  queue<pair<int, int>> q;
-  q.push(start);
-  
-  while (!q.empty()) {
-    pair<int, int> s = q.front();
-    q.pop();
-
-    for (int i=0; i < 4; i++) {
-      int x = s.first + dx[i];
-      int y = s.second + dy[i];
-      if (game[x][y] != '#') {
-        visited[x][y] = 1;
-        parent[x][y] = dir[i];
-        q.push({x, y});
-      }
-    }
-  }
-}
+char parent[1005][1005];
 
 void solve() {
   int row, col; cin >> row >> col;
 
+  queue<pair<int,int>> q;
+
+  vector<vector<int>> distM(row, vector<int>(col, INT_MAX));
+  vector<vector<int>> distP(row, vector<int>(col, INT_MAX));
   for (int i=0; i < row; i++) {
     string x; cin >> x;
     vector<char> r;
@@ -51,21 +30,100 @@ void solve() {
       if (x[j] == 'A') {
         player = {i, j};
       }
-
-      if ((i == 0 || i == row - 1)&& x[j] == '.') {
-        exits.push_back({i, j});
-      }
-
-      if ((j == 0 || j == col - 1)&& x[j] == '.') {
-        exits.push_back({i, j});
+      if (x[j] == 'M') {
+        q.push({i, j});
+        distM[i][j] = 0;
       }
     }
     game.push_back(r);
   }
 
-    // find shortest path from start to exit
+  if ((player.first == 0 || player.first == row-1) && 
+      (player.second == 0 || player.second == col - 1)) {
+    cout << "YES\n";
+    cout << "0\n";
+    return;
+  }
 
-    // find shortest path from monster to exit
+  bool visited[1005][1005] = {0};
+  while (!q.empty()) {
+    // bfs from EACH monster location to EACH location on map
+
+    auto [curr_x, curr_y] = q.front();
+    q.pop();
+    visited[curr_x][curr_y] = 1;
+
+    for (int i=0; i < 4; i++) {
+      int x = curr_x + dx[i];
+      int y = curr_y + dy[i];
+      bool is_bounded = ((x >= 0 && x < row) && (y >= 0 && y < col));
+      if (is_bounded && !visited[x][y] && game[x][y] != '#') {
+        visited[x][y] = 1;
+        distM[x][y] = min(distM[x][y], distM[curr_x][curr_y] + 1);
+        q.push({x, y});
+      }
+    }
+  }
+
+  memset(visited, 0, sizeof(visited));
+  q.push(player);
+  distP[player.first][player.second] = 0;
+
+  bool reached_exit = false;
+
+  pair<int, int> exit;
+  while (!q.empty()) {
+    auto [curr_x, curr_y] = q.front();
+    q.pop();
+    visited[curr_x][curr_y] = 1;
+
+    if ((curr_x == 0 || curr_x == row - 1)&& game[curr_x][curr_y] == '.')  {
+      exit = {curr_x, curr_y};
+      reached_exit = true;
+      break;
+    }
+
+    if ((curr_y == 0 || curr_y == col - 1)&& game[curr_x][curr_y] == '.') {
+      exit = {curr_x, curr_y};
+      reached_exit = true;
+      break;
+    }
+
+    for (int i=0; i < 4; i++) {
+      int x = curr_x + dx[i];
+      int y = curr_y + dy[i];
+      bool is_bounded = ((x >= 0 && x < row) && (y >= 0 && y < col));
+      if (is_bounded && !visited[x][y] && game[x][y] != '#' && distP[curr_x][curr_y] + 1 < distM[x][y]) {
+        distP[x][y] = distP[curr_x][curr_y] + 1;
+        visited[x][y] = 1;
+        q.push({x, y});
+        parent[x][y] = dir[i];
+      }
+    }
+  }
+
+  if (!reached_exit) {
+    cout << "NO\n";
+    return;
+  }
+
+  string path = "";
+  int r = exit.first , c = exit.second;
+
+  while (!(r == player.first && c == player.second)) {
+    char move = parent[r][c];
+    if (move == 'U') r++;
+    else if (move == 'D') r--;
+    else if (move == 'R') c--;
+    else if (move == 'L') c++;
+    path += move;
+  }
+
+  reverse(path.begin(), path.end());
+  cout << "YES\n";
+  cout << path.size() << "\n";
+  cout << path << "\n";
+  return;
 
 }
 

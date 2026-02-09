@@ -7,3 +7,5 @@ find . -type f -exec file {} \; |
   while read -r f; do
     rm -v "$f"
   done
+
+find . -type f \( -name "*.in" -o -name "*.out" \) -exec rm -v {} \;

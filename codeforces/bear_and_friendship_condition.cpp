@@ -22,7 +22,7 @@ void dfs(int v, int leader) {
   }
 }
 
-// following would fail if no 3 distinct people are friends with each other
+// TODO: do this using dsu as well
 void solve() {
   int n, m; cin >> n >> m;
 
