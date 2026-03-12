@@ -6,9 +6,10 @@ using namespace std;
 #define HAVE_TESTCASES 0
 
 const int INF = (int) 1e18;
+const int MOD = (int) 998244353;
 
 void solve() {
-
+  // which multiset we can make and which we can't make
 }
 
 #undef int

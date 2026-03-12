@@ -6,8 +6,8 @@
 
 #include <bits/stdc++.h>
 
-#define FOR(n) for (int i = 0; i < n; i++)
-#define REP(I, n, a) for (int i = I; i < n; i += a)
+#define FOR(__n) for (int i = 0; i < __n; i++)
+#define REP(__i, __n, __inc) for (int i = __i; i < __n; i += __inc)
 
 using namespace std;
 

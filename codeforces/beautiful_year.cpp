@@ -1,51 +1,44 @@
-/**
- * @author      : HackOlympus (zeus@hackolympus)
- * @file        : beautiful_year
- * @created     : Saturday Jan 22, 2022 19:00:31 IST
- */
+#include "bits/stdc++.h"
 
-/* minimum year number which is strictly larger than the given one and has only distinct digits. */
+using namespace std;
 
-#include <bits/stdc++.h>
+#define int long long
+#define HAVE_TESTCASES 0
 
-using namespace std ; 
+const int INF = (int)1e18;
 
-int isBeautiful(int n) ; 
-int NextBeautiful(int n) ; 
+void solve() {
+  int y; cin >> y;
 
-int main()
-{
-    int n ; 
-    cin >> n ;
-    cout << NextBeautiful(n) ; 
+  auto f = [](int x) {
+    int a[10] = {0}; // {0...9}
+    while (x) {
+      int last = x % 10;
+      a[last]++;
+      if (a[last] > 1) return false;
+      x/=10;
+    }
+    return true;
+  };
+
+  for (int i = y + 1; i <= 9050; i++) {
+    if (f(i)) {
+      cout << i << "\n";
+      break;
+    }
+  }
 }
 
-int isBeautiful(int n)
-{
-    int num_arr[4] ; 
-    for (int i=3; i!= -1 && n != 0; i--) 
-    {
-        num_arr[i] = n % 10 ; 
-        n = n / 10 ; 
-    }
-    
-    n = 4 ; 
-    while (n--)
-    {
-        int r = num_arr[n] ; 
-        for (int i = 0 ; i < n; i++)
-        {
-            if (r == num_arr[i]) return 0 ;  
-        }
-    }
-    return 1 ; 
-}
-
-int NextBeautiful(int n)
-{
-    for (int i=n+1; i < 10000; i++)
-    {
-        if (isBeautiful(i)) return i ; 
-    }
-    return -1 ; 
+#undef int
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+#if HAVE_TESTCASES
+  int t;
+  cin >> t;
+  while (t--)
+    solve();
+#else
+  solve();
+#endif
 }

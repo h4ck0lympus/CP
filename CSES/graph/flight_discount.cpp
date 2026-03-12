@@ -8,7 +8,8 @@ using namespace std;
 const int INF = (int) 1e18;
 
 void solve() {
-
+  int n, m; cin >> n >> m;
+  
 }
 
 #undef int

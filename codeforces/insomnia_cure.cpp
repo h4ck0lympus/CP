@@ -1,43 +1,35 @@
-/**
- * @author      : HackOlympus (zeus@hackolympus)
- * @file        : Insomnia cure
- * @created     : Tuesday Jan 25, 2022 12:43:16 IST
- */
+#include "bits/stdc++.h"
 
-#include <bits/stdc++.h>
+using namespace std;
 
-using namespace std ; 
+#define int long long
+#define HAVE_TESTCASES 0
 
-int main()
-{
-    int k,l,m,n,d ; 
-    cin >> k >> l >> m >> n >> d ; 
-    int arr[d+1] ; 
-    arr[0] = 0 ; 
-    for (int i = 1; i < d+1; i++)
-    {
-        arr[i] = 1;  
-    }
+const int INF = (int) 1e18;
 
-    for (int i = k; i < d+1 ; i+=k)
-    {
-        if (arr[i]) arr[i] = 0 ; 
-    }
-    for (int i = l; i < d+1 ; i+=l)
-    {
-        if (arr[i]) arr[i] = 0 ; 
-    }
-    for (int i = m; i < d+1 ; i+=m)
-    {
-        if (arr[i]) arr[i] = 0 ; 
-    }
-    for (int i = n; i < d+1 ; i+=n)
-    {
-        if (arr[i]) arr[i] = 0 ; 
-    }
-    int c = 0 ; 
-    for (int i = 0; i<d+1; i++) if (arr[i] == 0) c++ ; 
-    cout << c-1 << endl ; 
+void solve() {
+  int k, l, m, n, d;
+  cin >> k >> l >> m >> n >> d;
 
+  int cnt = 0;
+  for (int i = 1; i <= d; i++) {
+    if (i % k == 0 || i % l == 0 || i % m == 0 || i % n == 0)
+      cnt++;
+  }
+
+  cout << cnt << "\n";
 }
 
+#undef int
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+#if HAVE_TESTCASES
+  int t;
+  cin >> t;
+  while (t--)
+    solve();
+#else
+  solve();
+#endif
+}

@@ -8,7 +8,20 @@ using namespace std;
 const int INF = (int) 1e18;
 
 void solve() {
+  int mat[5][5];
+  
+  int x=-1, y=-1;
 
+  for (int i=0; i < 5; i++) {
+    for (int j=0; j < 5; j++) {
+      cin >> mat[i][j];
+      if (mat[i][j] == 1) {
+        x=i; y=j;
+      }
+    }
+  }
+
+  cout << abs(2-x) + abs(2-y) << "\n";
 }
 
 #undef int

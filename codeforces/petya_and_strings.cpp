@@ -1,30 +1,35 @@
-/**
- * @author      : HackOlympus (zeus@hackolympus)
- * @file        : Petya and Strings
- * @created     : Tuesday Jan 25, 2022 13:51:07 IST
- */
+#include "bits/stdc++.h"
 
-#include <bits/stdc++.h>
+using namespace std;
 
-using namespace std ; 
+#define int long long
+#define HAVE_TESTCASES 0
 
-int main()
-{
-    string a, b ; 
-    int i, j ; 
-    cin >> a >> b ; 
-    for (i=0, j=0; i < a.length() && j < b.length() && tolower(a[i]) == tolower(b[j]) ; i++, j++) ; 
-    if ((i != a.length() - 1 || j !=b.length()) && (tolower(a[i]) - tolower(b[j]) > 0) ) 
-    {
-        cout << 1 << endl ;
-        return 0 ; 
-    }
-    else if ((i != a.length() - 1 || j != b.length()) && (tolower(a[i]) - tolower(b[j]) < 0) ) 
-    {
-        cout << -1 << endl ; 
-        return 0 ; 
-    }
-    else cout << 0 << endl ; 
-    return 0 ; 
+const int INF = (int) 1e18;
+
+void solve() {
+  string a, b;
+  cin >> a >> b;
+
+  for (char &c : a) c = tolower(c);
+  for (char &c : b) c = tolower(c);
+
+  if (a > b) cout << 1;
+  else if (a < b) cout << -1;
+  else cout << 0;
+  cout << "\n";
+}
+
+#undef int
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+#if HAVE_TESTCASES
+  int t;
+  cin >> t;
+  while (t--) solve();
+#else
+  solve();
+#endif
 }
 

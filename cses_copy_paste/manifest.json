@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "CSES Paste Submit",
+  "version": "1.0",
+  "description": "paste code on CSES submit pages instead of uploading files.",
+  "permissions": ["*://cses.fi/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://cses.fi/problemset/submit/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

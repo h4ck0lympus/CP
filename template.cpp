@@ -6,6 +6,7 @@ using namespace std;
 #define HAVE_TESTCASES 0
 
 const int INF = (int) 1e18;
+const int MOD = (int) (1e9 + 7);
 
 void solve() {
 
