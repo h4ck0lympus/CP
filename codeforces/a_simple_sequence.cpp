@@ -3,19 +3,25 @@
 using namespace std;
 
 #define int long long
-#define HAVE_TESTCASES 0
+#define HAVE_TESTCASES 1
 
 const int INF = (int) 1e18;
-const int MOD = (int) 998244353;
+const int MOD = (int) (1e9 + 7);
 
 void solve() {
-  // which multiset we can make and which we can't make
+  int n; cin >> n;
+  
+  for (int i=n; i >= 1; i--) {
+    cout << i << " ";
+  }
+  cout << "\n";
 }
 
 #undef int
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
+  cout << setprecision(10);
 #if HAVE_TESTCASES
   int t;
   cin >> t;
