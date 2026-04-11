@@ -10,39 +10,38 @@ const int MOD = (int) (1e9 + 7);
 
 void solve() {
   int n; cin >> n;
-  vector<int> values(n);
-
-  int ms = 0;
+  vector<int> x(n);
+  int mx = 0, mn = INF; // possibility of all sum of coins = [mn, mx]
   for (int i=0; i < n; i++) {
-    cin >> values[i];
-    ms += values[i];
+    cin >> x[i];
+    mx += x[i];
+    mn = min(mn, x[i]);
   }
- 
-  vector<bool> dp(ms+1, 0); // dp[i] = can we reach sum i or not
-  dp[0] = 1; // sum of 0 is reachable by doing nothing ...
-  // since each coin can be used once - we check based on coins
-  for (int v: values) {
-    for (int i=ms; i >= 0; i--) {
-      if (i >= v && dp[i-v]) {
-        dp[i] = 1;
+  set<int> res;
+  vector<bool> dp(mx+1, 0); // dp[i] = sum i possible or not
+  dp[0] = 1; // sum of 0 is possible if we don't pick any coins
+
+  int cnt = 0;
+  for (int c: x) {
+    for (int sum=mx; sum >= mn; sum--) {
+      if (sum >= c && dp[sum-c]) {
+        if (!dp[sum]) cnt++; // if marking for first time
+        dp[sum] = 1;
       }
     }
   }
 
-  int total = 0;
-  for (int i=1; i <= ms; i++) total += dp[i];
-
-  cout << total << "\n";
-  for (int i=1; i <= ms; i++) {
-    if (dp[i]) cout << i << " ";
+  cout << cnt << "\n";
+  for (int i=1; i <= mx; i++) {
+    if (dp[i]) cout << i << " \n"[i == mx];
   }
-  cout << "\n";
 }
 
 #undef int
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
+  cout << setprecision(10);
 #if HAVE_TESTCASES
   int t;
   cin >> t;
