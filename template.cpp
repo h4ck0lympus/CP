@@ -1,7 +1,13 @@
+/*
+ID: vjuneja1
+TASK: 
+LANG: C++                 
+*/
 #include "bits/stdc++.h"
-
+// #include "dbg.h"
 using namespace std;
 
+#define TASK ""
 #define int long long
 #define HAVE_TESTCASES 0
 
@@ -14,6 +20,8 @@ void solve() {
 
 #undef int
 int main() {
+  // freopen(TASK ".in", "r", stdin);
+  // freopen(TASK ".out", "w", stdout);
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout << setprecision(10);

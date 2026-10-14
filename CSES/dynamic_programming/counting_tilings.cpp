@@ -1,28 +1,24 @@
-/*
-ID: vjuneja1
-TASK: 
-LANG: C++                 
-*/
 #include "bits/stdc++.h"
-
-#define TASK ""
 
 using namespace std;
 
 #define int long long
 #define HAVE_TESTCASES 0
 
+const int INF = (int) 1e18;
+const int MOD = (int) (1e9 + 7);
+
 void solve() {
+  int n,m; cin >> n >> m; 
+  vector<vector<int>> dp(n, vector<int>(n, 0));
 
 }
 
 #undef int
 int main() {
-  freopen(TASK ".in", "r", stdin);
-  freopen(TASK ".out", "w", stdout);
-
   ios_base::sync_with_stdio(false);
   cin.tie(0);
+  cout << setprecision(10);
 #if HAVE_TESTCASES
   int t;
   cin >> t;
@@ -30,7 +26,5 @@ int main() {
 #else
   solve();
 #endif
-  return 0;
 }
-
 
